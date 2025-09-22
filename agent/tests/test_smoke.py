@@ -1,5 +1,6 @@
 from conftest import pytest, ssh_exec_with_check
 
+
 def test_tar_works(ssh_client, temp_test_dir):
     cmds = [
         f"cd {temp_test_dir} && echo 'hello' > file.txt",

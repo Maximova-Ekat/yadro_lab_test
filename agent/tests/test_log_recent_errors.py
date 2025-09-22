@@ -1,6 +1,7 @@
 import shlex
 from conftest import ssh_exec_with_check
 
+
 def test_logs_recent_errors(ssh_client, target_config):
     """Нет строк с 'error' в логах Apache за последние N минут"""
     n = target_config["log_interval"]
