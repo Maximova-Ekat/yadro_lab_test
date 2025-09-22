@@ -1,0 +1,31 @@
+services:
+  target:
+    build: ./target
+    container_name: target
+    ports:
+      - "8080:80"
+      - "2222:22"
+    networks:
+      - testnet
+
+  agent:
+    build: ./agent
+    container_name: agent
+    depends_on:
+      - target
+    environment:
+      - TARGET_HOST=target
+      - TARGET_SSH_PORT=22
+      - TARGET_HTTP_PORT=80
+      - TARGET_USER=user
+      - TARGET_PASS=password
+      - LOG_INTERVAL=5
+      - HTTP_TIMEOUT=5
+      - SSH_MAX_RETRIES=5
+      - SSH_RETRY_DELAY=1
+    networks:
+      - testnet
+
+networks:
+  testnet:
+    driver: bridge
