@@ -7,15 +7,15 @@ if ! command -v docker >/dev/null 2>&1 || ! docker compose version >/dev/null 2>
 fi
 
 # Build images
-echo "\nBuilding Docker images..."
+echo -e "\n Building Docker images..."
 docker compose build || { echo "Build failed"; exit 1; }
 
 # Start services (except agent if it is only for tests)
-echo "\nStarting target service..."
+echo -e "\n Starting target service..."
 docker compose up -d target || { echo "Startup failed"; exit 1; }
 
 # Wait for services to be ready
-echo "\nWaiting for services to be ready..."
+echo -e "\n Waiting for services to be ready..."
 sleep 5
 
 # Run tests in the agent container (once)
